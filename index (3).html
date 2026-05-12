@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SM-Official | Server Manager Bot</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent: #3b82f6;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 5%;
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background-color: #2563eb;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+        }
+
+        h2 {
+            color: var(--accent);
+            border-bottom: 2px solid #334155;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .article {
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-weight: bold;
+            color: #60a5fa;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Staff Panel Styles */
+        #staff-login {
+            border: 2px dashed #475569;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #admin-panel {
+            display: none;
+            background: #111827;
+            border: 1px solid var(--success);
+        }
+
+        input[type="password"], input[type="text"], select {
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: #334155;
+            margin-left: 10px;
+        }
+
+        .online { color: var(--success); border: 1px solid var(--success); }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">SM-Official</div>
+    <nav>
+        <a href="#about">Présentation</a>
+        <a href="#tos">ToS</a>
+        <a href="#rules">Règlement</a>
+        <a href="#staff">Staff</a>
+        <a href="https://discord.gg/syRUq9D5hJ" class="btn" style="margin-left:20px">Rejoindre</a>
+    </nav>
+</header>
+
+<div class="hero">
+    <h1>Server Manager</h1>
+    <p>Un bot de gestion conçu pour automatiser, sécuriser et simplifier votre serveur Discord.</p>
+    <div style="margin-top: 20px;">
+        <span id="bot-status-display" class="status-badge online">● Statut : Opérationnel</span>
+    </div>
+</div>
+
+<div class="container">
+    
+    <section id="about" class="section">
+        <h2>🤖 À Propos du Bot</h2>
+        <p><strong>Un bot de gestion conçu pour automatiser, sécuriser et simplifier votre serveur Discord.</strong></p>
+        <ul>
+            <li><strong>Modération :</strong> Ban, kick, gestion complète.</li>
+            <li><strong>Sécurité :</strong> Vérification par captcha, protection anti-spam.</li>
+            <li><strong>Personnalisation :</strong> Messages de bienvenue, rôles automatiques.</li>
+        </ul>
+        <p><em>Créateur : Settryxn</em></p>
+    </section>
+
+    <section id="rules" class="section">
+        <h2>📜 Règlement Officiel du Support</h2>
+        <div class="article">
+            <span class="article-title">ARTICLE 1 | Respect</span>
+            Le respect envers tous les membres est obligatoire. Les insultes et provocations sont interdites.
+        </div>
+        <div class="article">
+            <span class="article-title">ARTICLE 2 | Spam & Flood</span>
+            Le spam, flood, abus de majuscules ou ping abusif est interdit.
+        </div>
+        <div class="article">
+            <span class="article-title">ARTICLE 3 | Contenu interdit</span>
+            Les contenus NSFW, haineux ou illégaux sont strictement interdits.
+        </div>
+        <div class="article">
+            <span class="article-title">ARTICLE 8 | Server Manager Bot</span>
+            L’abus des commandes ou exploitations de bugs sont strictement interdits.
+        </div>
+    </section>
+
+    <section id="tos" class="section">
+        <h2>⚖️ Termes de Service (ToS)</h2>
+        <p>En utilisant Server Manager, vous acceptez de maintenir un environnement sûr. Les modérateurs se réservent le droit de sanctionner toute violation. Votre confidentialité est respectée, aucune donnée personnelle n'est collectée sans consentement.</p>
+    </section>
+
+    <section id="staff" class="section">
+        <h2>🔒 Espace Discret Staff</h2>
+        <div id="staff-login">
+            <p>Accès restreint. Veuillez entrer le code d'accès.</p>
+            <input type="password" id="staff-pass" placeholder="Mot de passe...">
+            <br>
+            <button class="btn" onclick="checkAuth()">Connexion</button>
+        </div>
+
+        <div id="admin-panel" class="section">
+            <h3 style="color: var(--success)">Panneau d'Administration</h3>
+            <p>Modifier le statut public du Bot :</p>
+            <select id="status-selector">
+                <option value="Opérationnel">Opérationnel (Vert)</option>
+                <option value="Maintenance">En Maintenance (Orange)</option>
+                <option value="Hors-ligne">Hors-ligne (Rouge)</option>
+            </select>
+            <br><br>
+            <button class="btn" onclick="updateStatus()" style="background: var(--success)">Mettre à jour le site</button>
+            <button class="btn" onclick="logout()" style="background: var(--danger); margin-left:10px">Déconnexion</button>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    Server Manager • Development Team • © 2024
+</footer>
+
+<script>
+    function checkAuth() {
+        const pass = document.getElementById('staff-pass').value;
+        if (pass === "SM04") {
+            document.getElementById('staff-login').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            alert("Accès autorisé, Bienvenue Staff.");
+        } else {
+            alert("Mot de passe incorrect.");
+        }
+    }
+
+    function updateStatus() {
+        const newStatus = document.getElementById('status-selector').value;
+        const display = document.getElementById('bot-status-display');
+        display.innerHTML = "● Statut : " + newStatus;
+        
+        if(newStatus === "Opérationnel") display.style.color = "#22c55e";
+        if(newStatus === "Maintenance") display.style.color = "#f59e0b";
+        if(newStatus === "Hors-ligne") display.style.color = "#ef4444";
+        
+        alert("Statut mis à jour sur la page d'accueil !");
+    }
+
+    function logout() {
+        document.getElementById('staff-login').style.display = 'block';
+        document.getElementById('admin-panel').style.display = 'none';
+        document.getElementById('staff-pass').value = '';
+    }
+</script>
+
+</body>
+</html>
